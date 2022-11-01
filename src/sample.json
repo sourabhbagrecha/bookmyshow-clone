@@ -1,0 +1,47 @@
+{
+  "defaultNumberOfColumnsPerRow": 10,
+  "movies": [
+    {
+      "_id": 123,
+      "name": "Lagaan",
+      "rating": 10
+    }
+  ],
+  "shows": [
+    {
+      "_id": 100,
+      "movieId": 123,
+      "time": "7-10pm",
+      "seatTypes": [
+        {
+          "name": "Standard",
+          "price": 90,
+          "rows": 3,
+          "bookings": ["Standard-0-0", "Standard-0-1"]
+        },
+        {
+          "name": "Premium",
+          "price": 120,
+          "rows": 9
+        }
+      ]
+    },
+    {
+      "_id": 101,
+      "movieId": 123,
+      "time": "7-10 am",
+      "seatTypes": [
+        {
+          "name": "Standard",
+          "price": 70,
+          "rows": 3
+        },
+        {
+          "name": "Premium",
+          "price": 100,
+          "rows": 9
+        }
+      ]
+    }
+  ]
+}
