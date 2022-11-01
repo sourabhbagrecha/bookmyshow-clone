@@ -10,10 +10,10 @@ function SeatTypeSelect() {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
       }}
     >
-      <h3>Select Seat Type:</h3>
+      <p>Select Seat Type:</p>
       <select value={seatType} onChange={handleTypeChange}>
         <option value="Premium">Premium</option>
         <option value="Standard">Standard</option>

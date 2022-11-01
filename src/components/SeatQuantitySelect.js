@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ShowContext } from "../contexts/ShowContext";
 
 function SeatQuantitySelect() {
@@ -10,10 +10,10 @@ function SeatQuantitySelect() {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "space-around",
+        justifyContent: "space-between",
       }}
     >
-      <h3>Select Seat Quantity:</h3>
+      <p>Select Seat Quantity:</p>
       <select value={seatQuantity.toString()} onChange={handleQuantityChange}>
         <option value="1">1</option>
         <option value="2">2</option>
