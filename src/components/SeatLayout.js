@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { ShowContext } from "../contexts/ShowContext";
 import Seat from "./Seat";
+import SeatQuantitySelect from "./SeatQuantitySelect";
+import SeatTypeSelect from "./SeatTypeSelect";
 
 const SeatTypeLayout = ({ seatTypeDetails }) => {
   return (
@@ -26,8 +28,12 @@ const SeatTypeLayout = ({ seatTypeDetails }) => {
 
 export default function SeatLayout() {
   const { show } = useContext(ShowContext);
+  if (!show) return <h1>Select a Show!</h1>;
   return (
     <div>
+      <h1>Select your seats!</h1>
+      <SeatTypeSelect />
+      <SeatQuantitySelect />
       {show.seatLayouts.map((seatTypeDetails) => (
         <SeatTypeLayout seatTypeDetails={seatTypeDetails} />
       ))}

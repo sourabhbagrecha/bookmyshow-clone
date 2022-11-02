@@ -1,15 +1,19 @@
 import { createContext, useEffect, useState } from "react";
 import defaults from "../sample.json";
 
-const { shows, defaultNumberOfColumnsPerRow } = defaults;
+const { movies, defaultNumberOfColumnsPerRow } = defaults;
 
 export const ShowContext = createContext();
 
-const defaultShowId = 100;
-
-const computeShow = (showId, userSelections = [], selectedSeatType) => {
-  return shows
-    .find((s) => s._id === showId)
+const computeShow = (
+  movieId,
+  showId,
+  selectedSeatType,
+  userSelections = []
+) => {
+  return movies
+    .find((m) => m._id === movieId)
+    .shows.find((s) => s._id === showId)
     .seatTypes.map((seatType) => {
       const allSeatsInASeatType = [];
       for (let row = 0; row < seatType.rows; row++) {
@@ -37,16 +41,24 @@ const computeShow = (showId, userSelections = [], selectedSeatType) => {
 };
 
 export const ShowProvider = ({ children }) => {
-  const computedShow = computeShow(defaultShowId);
-  const [show, setShow] = useState({ seatLayouts: computedShow });
+  const [selectedShowId, setSelectedShowId] = useState(null);
+  const [selectedMovieId, setSelectedMovieId] = useState(null);
+  const [show, setShow] = useState(null);
   const [seatQuantity, setSeatQuantity] = useState(1);
   const [seatType, setSeatType] = useState("Standard");
   const [userSelections, setUserSelections] = useState(["Standard-0-5"]);
 
   useEffect(() => {
-    const computedShow = computeShow(defaultShowId, userSelections, seatType);
-    setShow({ seatLayouts: computedShow });
-  }, [userSelections, seatType]);
+    if (selectedMovieId && selectedShowId) {
+      const computedShow = computeShow(
+        selectedMovieId,
+        selectedShowId,
+        seatType,
+        userSelections
+      );
+      setShow({ seatLayouts: computedShow });
+    }
+  }, [seatType, selectedMovieId, selectedShowId, userSelections]);
 
   useEffect(() => {
     setUserSelections([]);
@@ -65,6 +77,8 @@ export const ShowProvider = ({ children }) => {
         seatType,
         handleTypeChange,
         setUserSelections,
+        setSelectedShowId,
+        setSelectedMovieId,
       }}
     >
       {children}
